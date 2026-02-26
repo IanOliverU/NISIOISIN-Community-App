@@ -1,0 +1,56 @@
+# Reduce EAS upload size (max 2 GB). Keep .gitignore rules and add more.
+
+# dependencies
+node_modules/
+
+# Expo
+.expo/
+dist/
+web-build/
+expo-env.d.ts
+
+# Native (EAS runs prebuild)
+.kotlin/
+*.orig.*
+*.jks
+*.p8
+*.p12
+*.key
+*.mobileprovision
+/ios
+/android
+
+# Metro
+.metro-health-check*
+
+# debug
+npm-debug.*
+yarn-debug.*
+yarn-error.*
+
+# macOS / Windows
+.DS_Store
+*.pem
+Thumbs.db
+*.lnk
+
+# local env
+.env*.local
+
+# TypeScript
+*.tsbuildinfo
+
+app-example
+
+# Git (large history can bloat the archive)
+.git/
+.gitignore
+
+# Docs and dev-only
+*.md
+!README.md
+.cursor/
+.vscode/
+terminals/
+*.log
+coverage/
