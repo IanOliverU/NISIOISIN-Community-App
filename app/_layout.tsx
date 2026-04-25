@@ -1,5 +1,5 @@
 import { DarkTheme, DefaultTheme, ThemeProvider } from '@react-navigation/native';
-import { Stack } from 'expo-router';
+import { Stack, useSegments } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useMemo, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
@@ -18,10 +18,12 @@ export const unstable_settings = {
 function RootLayoutInner() {
   const { isHydrated } = useColorSchemeContext();
   const colorScheme = useColorScheme();
+  const segments = useSegments();
   const [isLoading, setIsLoading] = useState(true);
   const backgroundColor = useThemeColor({}, 'background');
   const textColor = useThemeColor({}, 'text');
   const tintColor = useThemeColor({}, 'tint');
+  const hideStatusBar = segments[0] === 'reader';
   const navigationTheme = useMemo(() => {
     const baseTheme = colorScheme === 'dark' ? DarkTheme : DefaultTheme;
     return {
@@ -52,7 +54,7 @@ function RootLayoutInner() {
           />
           <Stack.Screen
             name="reader"
-            options={{ headerShown: false }}
+            options={{ headerShown: false, statusBarHidden: true }}
           />
           <Stack.Screen
             name="manga-series/[id]"
@@ -64,7 +66,7 @@ function RootLayoutInner() {
           />
           <Stack.Screen name="modal" options={{ presentation: 'modal', title: 'Settings' }} />
         </Stack>
-        <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
+        <StatusBar hidden={hideStatusBar} style={colorScheme === 'dark' ? 'light' : 'dark'} />
         {isLoading && (
           <LoadingScreen onFinish={() => setIsLoading(false)} />
         )}

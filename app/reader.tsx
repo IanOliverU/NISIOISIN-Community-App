@@ -14,6 +14,7 @@ import { WebView } from 'react-native-webview';
 
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 import { useThemeColor } from '@/hooks/use-theme-color';
 import { saveToHistory } from '@/src/history/storage';
 import { getPdfRequire } from '@/src/lightnovels/asset-map';
@@ -47,6 +48,7 @@ export default function ReaderScreen() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const tintColor = useThemeColor({}, 'tint');
+  const textColor = useThemeColor({}, 'text');
   const lastPageRef = useRef(lastPage);
   lastPageRef.current = lastPage;
 
@@ -83,7 +85,7 @@ export default function ReaderScreen() {
   </style>
 </head>
 <body>
-  <div id="load">Loading PDF…</div>
+  <div id="load">Loading PDF...</div>
   <div id="pages"></div>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
   <script>
@@ -235,11 +237,25 @@ export default function ReaderScreen() {
     }
   }, []);
 
+  const openInSystemViewer = useCallback(async () => {
+    if (!localFileUri) return;
+    try {
+      if (Platform.OS === 'android') {
+        const contentUri = await FileSystem.getContentUriAsync(localFileUri);
+        await Linking.openURL(contentUri);
+      } else {
+        await Linking.openURL(localFileUri);
+      }
+    } catch (e) {
+      console.warn('Open in system viewer failed:', e);
+    }
+  }, [localFileUri]);
+
   if (loading) {
     return (
       <ThemedView style={styles.centered}>
         <ActivityIndicator size="large" />
-        <ThemedText style={styles.loadingText}>Loading…</ThemedText>
+        <ThemedText style={styles.loadingText}>Loading...</ThemedText>
       </ThemedView>
     );
   }
@@ -261,41 +277,38 @@ export default function ReaderScreen() {
       {!immersive && (
         <ThemedView style={styles.headerWrap}>
           <ThemedView style={styles.header}>
-            <Pressable onPress={() => router.back()} style={styles.headerBack}>
-              <ThemedText type="defaultSemiBold">← Back</ThemedText>
+            <Pressable
+              accessibilityLabel="Back"
+              accessibilityRole="button"
+              onPress={() => router.back()}
+              style={styles.iconButton}
+            >
+              <IconSymbol name="chevron.left" size={24} color={textColor} />
             </Pressable>
             <ThemedText type="defaultSemiBold" numberOfLines={1} style={styles.headerTitle}>
               {title}
             </ThemedText>
             <ThemedView style={styles.headerActions}>
-            {localFileUri ? (
+              {localFileUri ? (
+                <Pressable
+                  accessibilityLabel="Open in system viewer"
+                  accessibilityRole="button"
+                  onPress={openInSystemViewer}
+                  style={styles.iconButton}
+                >
+                  <IconSymbol name="arrow.up.right.square" size={22} color={textColor} />
+                </Pressable>
+              ) : null}
               <Pressable
-                onPress={async () => {
-                  if (!localFileUri) return;
-                  try {
-                    if (Platform.OS === 'android') {
-                      const contentUri = await FileSystem.getContentUriAsync(localFileUri);
-                      await Linking.openURL(contentUri);
-                    } else {
-                      await Linking.openURL(localFileUri);
-                    }
-                  } catch (e) {
-                    console.warn('Open in system viewer failed:', e);
-                  }
-                }}
-                style={styles.openExternallyButton}
+                accessibilityLabel="Enter immersive view"
+                accessibilityRole="button"
+                onPress={() => setImmersive(true)}
+                style={styles.iconButton}
               >
-                <ThemedText type="defaultSemiBold">Open in system viewer</ThemedText>
+                <IconSymbol name="arrow.up.left.and.arrow.down.right" size={22} color={textColor} />
               </Pressable>
-            ) : null}
-            <Pressable
-              onPress={() => setImmersive((i) => !i)}
-              style={styles.immersiveButton}
-            >
-              <ThemedText type="defaultSemiBold">{immersive ? 'Show UI' : 'Immersive'}</ThemedText>
-            </Pressable>
+            </ThemedView>
           </ThemedView>
-        </ThemedView>
         {Platform.OS !== 'web' && totalPages != null && totalPages > 0 && (
           <ThemedView style={styles.progressSection}>
             <ThemedText style={styles.progressText}>
@@ -323,9 +336,13 @@ export default function ReaderScreen() {
       )}
       {immersive && (
         <Pressable
-          style={styles.immersiveTap}
+          accessibilityLabel="Exit immersive view"
+          accessibilityRole="button"
           onPress={() => setImmersive(false)}
-        />
+          style={styles.immersiveExitButton}
+        >
+          <IconSymbol name="arrow.down.right.and.arrow.up.left" size={22} color="#fff" />
+        </Pressable>
       )}
       <ThemedView style={styles.webViewContainer}>
         {Platform.OS === 'web' ? (
@@ -426,8 +443,12 @@ const styles = StyleSheet.create({
     height: '100%',
     borderRadius: 3,
   },
-  headerBack: {
-    padding: 4,
+  iconButton: {
+    width: 36,
+    height: 36,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 18,
   },
   headerTitle: {
     flex: 1,
@@ -437,14 +458,16 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     gap: 8,
   },
-  openExternallyButton: {
-    padding: 4,
-  },
-  immersiveButton: {
-    padding: 4,
-  },
-  immersiveTap: {
-    ...StyleSheet.absoluteFillObject,
+  immersiveExitButton: {
+    position: 'absolute',
+    top: Platform.OS === 'ios' ? 48 : 12,
+    right: 12,
+    width: 40,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: 20,
+    backgroundColor: 'rgba(0,0,0,0.55)',
     zIndex: 1,
   },
   webViewContainer: {
