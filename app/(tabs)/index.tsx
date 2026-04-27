@@ -13,6 +13,7 @@ import type { Series } from '@/src/lightnovels/types';
 import { getPagesReadToday } from '@/src/stats/storage';
 
 const COVER_PLACEHOLDER = require('@/assets/images/partial-react-logo.png');
+const COMING_SOON_COVER = require('@/assets/images/coming-soon-cover.png');
 
 const PAD_H = 12;
 const GAP = 16;
@@ -30,6 +31,9 @@ function SeriesCard({
   const coverSource = firstVolume
     ? getCoverSource(series.folder, firstVolume.coverFilename)
     : null;
+  const imageSource = firstVolume
+    ? coverSource ?? COVER_PLACEHOLDER
+    : COMING_SOON_COVER;
 
   return (
     <Pressable
@@ -44,7 +48,7 @@ function SeriesCard({
         style={[styles.coverContainer, { width: cardWidth, aspectRatio: COVER_ASPECT }]}
       >
         <Image
-          source={coverSource ?? COVER_PLACEHOLDER}
+          source={imageSource}
           style={styles.cover}
           contentFit="cover"
         />

@@ -10,6 +10,7 @@ import { manifest } from '@/src/lightnovels/data';
 import type { Volume } from '@/src/lightnovels/types';
 
 const COVER_PLACEHOLDER = require('@/assets/images/partial-react-logo.png');
+const COMING_SOON_COVER = require('@/assets/images/coming-soon-cover.png');
 
 const PAD_H = 12;
 const GAP = 16;
@@ -75,6 +76,7 @@ export default function SeriesScreen() {
   const { width } = useWindowDimensions();
   const series = manifest.series.find((s) => s.id === id);
   const cardWidth = (width - PAD_H * 2 - GAP) / 2;
+  const emptyCoverWidth = Math.min(Math.max(width - PAD_H * 2, 160), 260);
 
   const navigation = useNavigation();
   useEffect(() => {
@@ -92,7 +94,21 @@ export default function SeriesScreen() {
   return (
     <ThemedView style={styles.container}>
       {series.volumes.length === 0 ? (
-        <ThemedText style={styles.empty}>No volumes yet.</ThemedText>
+        <ThemedView style={styles.emptyState}>
+          <ThemedView
+            style={[
+              styles.coverContainer,
+              { width: emptyCoverWidth, aspectRatio: COVER_ASPECT },
+            ]}
+          >
+            <Image
+              source={COMING_SOON_COVER}
+              style={styles.cover}
+              contentFit="cover"
+            />
+          </ThemedView>
+          <ThemedText style={styles.empty}>No volumes yet.</ThemedText>
+        </ThemedView>
       ) : (
         <ScrollView
           contentContainerStyle={styles.grid}
@@ -120,9 +136,15 @@ const styles = StyleSheet.create({
     paddingTop: 16,
   },
   empty: {
+    marginTop: 12,
     paddingHorizontal: 20,
-    paddingTop: 8,
     opacity: 0.7,
+    textAlign: 'center',
+  },
+  emptyState: {
+    alignItems: 'center',
+    paddingHorizontal: PAD_H,
+    paddingTop: 8,
   },
   grid: {
     flexDirection: 'row',
