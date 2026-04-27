@@ -82,6 +82,7 @@ const PDFS: PdfMap = {
   'Zaregoto Series|Zaregoto Series v03 - Suspension [Vertical] [LuCaZ].pdf': require('./Zaregoto Series/Zaregoto Series v03 - Suspension [Vertical] [LuCaZ].pdf'),
   'Zaregoto Series|Zaregoto Series v04 - Psycho Logical [DutchAngleTL].pdf': require('./Zaregoto Series/Zaregoto Series v04 - Psycho Logical [DutchAngleTL].pdf'),
   'Zaregoto Series|Zaregoto Series v05 - Psycho Logical 2 [DutchAngleTL].pdf': require('./Zaregoto Series/Zaregoto Series v05 - Psycho Logical 2 [DutchAngleTL].pdf'),
+  'Zaregoto Series|Zaregoto Series v06 - Hitokui Magical [Suiminchuudoku, SwayTL].pdf': require('./Zaregoto Series/Zaregoto Series v06 - Hitokui Magical [Suiminchuudoku, SwayTL].pdf'),
   'Zaregoto Series|Zaregoto Series v07 - Nekosogi Radical 1 [SwayTL].pdf': require('./Zaregoto Series/Zaregoto Series v07 - Nekosogi Radical 1 [SwayTL].pdf'),
   'Zaregoto Series|Zaregoto Series v08 - Nekosogi Radical 2 [SwayTL].pdf': require('./Zaregoto Series/Zaregoto Series v08 - Nekosogi Radical 2 [SwayTL].pdf'),
   'Zaregoto Series|Zaregoto Series v09 - Nekosogi Radical 3 [SwayTL].pdf': require('./Zaregoto Series/Zaregoto Series v09 - Nekosogi Radical 3 [SwayTL].pdf'),

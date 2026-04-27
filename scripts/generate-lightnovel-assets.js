@@ -6,7 +6,8 @@
  * Run: node scripts/generate-lightnovel-assets.js
  *
  * PDF-driven: finds all .pdf in each series folder, then looks for matching .webp
- * (same base name) in the folder or in a "Novel Covers" subfolder.
+ * (same base name) in the folder or in a "Novel Covers" subfolder. PDFs with
+ * missing covers are kept and use a runtime placeholder in the app.
  */
 
 const fs = require('fs');
@@ -15,6 +16,26 @@ const path = require('path');
 const LIGHTNOVELS_DIR = path.join(__dirname, '..', 'src', 'lightnovels');
 const COVERS_SUBFOLDER = 'Novel Covers';
 const SKIP_FILES = new Set(['manifest.json', 'types.json', 'types.ts', 'data.ts', 'asset-map.ts']);
+const TITLE_OVERRIDES = {
+  'Zaregoto Series|Zaregoto Series v01 - Decapitation [Vertical] [LuCaZ].pdf':
+    'Volume 1 - The Beheading Cycle: The Blue Savant and the Nonsense Bearer',
+  'Zaregoto Series|Zaregoto Series v02 - Strangulation [Vertical] [LuCaZ].pdf':
+    'Volume 2 - Strangulation Romanticist: Hitoshiki Zerozaki, Human Failure',
+  'Zaregoto Series|Zaregoto Series v03 - Suspension [Vertical] [LuCaZ].pdf':
+    "Volume 3 - Hanging High School: The Nonsense Bearer's Pupil",
+  'Zaregoto Series|Zaregoto Series v04 - Psycho Logical [DutchAngleTL].pdf':
+    "Volume 4 - Psycho Logical (Part One): Gaisuke Utsurigi's Nonsense Killer",
+  'Zaregoto Series|Zaregoto Series v05 - Psycho Logical 2 [DutchAngleTL].pdf':
+    'Volume 5 - Psycho Logical (Part Two): Sour Little Song',
+  'Zaregoto Series|Zaregoto Series v06 - Hitokui Magical [Suiminchuudoku, SwayTL].pdf':
+    'Volume 6 - Cannibal Magical: Niounomiya Siblings, Masters of Carnage',
+  'Zaregoto Series|Zaregoto Series v07 - Nekosogi Radical 1 [SwayTL].pdf':
+    'Volume 7 - Uprooted Radical (Part One): The Thirteen Stairs',
+  'Zaregoto Series|Zaregoto Series v08 - Nekosogi Radical 2 [SwayTL].pdf':
+    'Volume 8 - Uprooted Radical (Part Two): Overkill Red vs. The Orange Seed',
+  'Zaregoto Series|Zaregoto Series v09 - Nekosogi Radical 3 [SwayTL].pdf':
+    'Volume 9 - Uprooted Radical (Part Three): The Blue Savant and the Nonsense Bearer',
+};
 
 function slug(name) {
   return name
@@ -60,11 +81,12 @@ function scanSeries() {
       }
 
       if (!coverFilename) {
-        console.warn(`  No cover for ${pdfName}, skipping.`);
-        continue;
+        console.warn(`  No cover for ${pdfName}, using runtime placeholder.`);
+        coverFilename = webpName;
       }
 
-      const title = base.replace(/^[^v]*\s*v?\d+\s*-\s*/, '').trim() || base;
+      const generatedTitle = base.replace(/^[^v]*\s*v?\d+\s*-\s*/, '').trim() || base;
+      const title = TITLE_OVERRIDES[`${ent.name}|${pdfName}`] ?? generatedTitle;
       volumes.push({
         coverFilename,
         title: title,
@@ -129,10 +151,11 @@ function generateAssetMap(seriesList) {
 
   for (const s of seriesList) {
     for (const v of s.volumes) {
-      const key = `'${s.folder}|${v.coverFilename}'`;
-      const coverPath = v.coverRequirePath || v.coverFilename;
-      const reqPath = `./${s.folder}/${coverPath}`.replace(/\\/g, '/');
-      coverLines.push(`  ${key}: require('${reqPath}'),`);
+      if (v.coverRequirePath) {
+        const key = `'${s.folder}|${v.coverFilename}'`;
+        const reqPath = `./${s.folder}/${v.coverRequirePath}`.replace(/\\/g, '/');
+        coverLines.push(`  ${key}: require('${reqPath}'),`);
+      }
       const pdfKey = `'${s.folder}|${v.pdfFilename}'`;
       const pdfReqPath = `./${s.folder}/${v.pdfFilename}`.replace(/\\/g, '/');
       pdfLines.push(`  ${pdfKey}: require('${pdfReqPath}'),`);

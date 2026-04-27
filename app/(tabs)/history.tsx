@@ -12,7 +12,7 @@ import type { HistoryEntry } from '@/src/history/types';
 import { getCoverSource } from '@/src/lightnovels/asset-map';
 import { getPagesReadToday } from '@/src/stats/storage';
 
-const COVER_PLACEHOLDER = require('@/assets/images/partial-react-logo.png');
+const COMING_SOON_COVER = require('@/assets/images/coming-soon-cover.png');
 
 function HistoryRow({
   entry,
@@ -30,7 +30,7 @@ function HistoryRow({
     >
       <ThemedView style={styles.coverWrap}>
         <Image
-          source={coverSource ?? COVER_PLACEHOLDER}
+          source={coverSource ?? COMING_SOON_COVER}
           style={styles.cover}
           contentFit="cover"
         />

@@ -203,42 +203,47 @@
       "volumes": [
         {
           "coverFilename": "Zaregoto Series v01 - Decapitation [Vertical] [LuCaZ].webp",
-          "title": "Decapitation [Vertical] [LuCaZ]",
+          "title": "Volume 1 - The Beheading Cycle: The Blue Savant and the Nonsense Bearer",
           "pdfFilename": "Zaregoto Series v01 - Decapitation [Vertical] [LuCaZ].pdf"
         },
         {
           "coverFilename": "Zaregoto Series v02 - Strangulation [Vertical] [LuCaZ].webp",
-          "title": "Strangulation [Vertical] [LuCaZ]",
+          "title": "Volume 2 - Strangulation Romanticist: Hitoshiki Zerozaki, Human Failure",
           "pdfFilename": "Zaregoto Series v02 - Strangulation [Vertical] [LuCaZ].pdf"
         },
         {
           "coverFilename": "Zaregoto Series v03 - Suspension [Vertical] [LuCaZ].webp",
-          "title": "Suspension [Vertical] [LuCaZ]",
+          "title": "Volume 3 - Hanging High School: The Nonsense Bearer's Pupil",
           "pdfFilename": "Zaregoto Series v03 - Suspension [Vertical] [LuCaZ].pdf"
         },
         {
           "coverFilename": "Zaregoto Series v04 - Psycho Logical [DutchAngleTL].webp",
-          "title": "Psycho Logical [DutchAngleTL]",
+          "title": "Volume 4 - Psycho Logical (Part One): Gaisuke Utsurigi's Nonsense Killer",
           "pdfFilename": "Zaregoto Series v04 - Psycho Logical [DutchAngleTL].pdf"
         },
         {
           "coverFilename": "Zaregoto Series v05 - Psycho Logical 2 [DutchAngleTL].webp",
-          "title": "Psycho Logical 2 [DutchAngleTL]",
+          "title": "Volume 5 - Psycho Logical (Part Two): Sour Little Song",
           "pdfFilename": "Zaregoto Series v05 - Psycho Logical 2 [DutchAngleTL].pdf"
         },
         {
+          "coverFilename": "Zaregoto Series v06 - Hitokui Magical [Suiminchuudoku, SwayTL].webp",
+          "title": "Volume 6 - Cannibal Magical: Niounomiya Siblings, Masters of Carnage",
+          "pdfFilename": "Zaregoto Series v06 - Hitokui Magical [Suiminchuudoku, SwayTL].pdf"
+        },
+        {
           "coverFilename": "Zaregoto Series v07 - Nekosogi Radical 1 [SwayTL].webp",
-          "title": "Nekosogi Radical 1 [SwayTL]",
+          "title": "Volume 7 - Uprooted Radical (Part One): The Thirteen Stairs",
           "pdfFilename": "Zaregoto Series v07 - Nekosogi Radical 1 [SwayTL].pdf"
         },
         {
           "coverFilename": "Zaregoto Series v08 - Nekosogi Radical 2 [SwayTL].webp",
-          "title": "Nekosogi Radical 2 [SwayTL]",
+          "title": "Volume 8 - Uprooted Radical (Part Two): Overkill Red vs. The Orange Seed",
           "pdfFilename": "Zaregoto Series v08 - Nekosogi Radical 2 [SwayTL].pdf"
         },
         {
           "coverFilename": "Zaregoto Series v09 - Nekosogi Radical 3 [SwayTL].webp",
-          "title": "Nekosogi Radical 3 [SwayTL]",
+          "title": "Volume 9 - Uprooted Radical (Part Three): The Blue Savant and the Nonsense Bearer",
           "pdfFilename": "Zaregoto Series v09 - Nekosogi Radical 3 [SwayTL].pdf"
         }
       ]

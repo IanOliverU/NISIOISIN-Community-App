@@ -9,7 +9,6 @@ import { getCoverSource } from '@/src/lightnovels/asset-map';
 import { manifest } from '@/src/lightnovels/data';
 import type { Volume } from '@/src/lightnovels/types';
 
-const COVER_PLACEHOLDER = require('@/assets/images/partial-react-logo.png');
 const COMING_SOON_COVER = require('@/assets/images/coming-soon-cover.png');
 
 const PAD_H = 12;
@@ -59,7 +58,7 @@ function VolumeCard({
         style={[styles.coverContainer, { width: cardWidth, aspectRatio: COVER_ASPECT }]}
       >
         <Image
-          source={coverSource ?? COVER_PLACEHOLDER}
+          source={coverSource ?? COMING_SOON_COVER}
           style={styles.cover}
           contentFit="cover"
         />
