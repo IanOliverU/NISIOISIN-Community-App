@@ -42,6 +42,7 @@ const COVERS: AssetMap = {
   'Zaregoto Series|Zaregoto Series v03 - Suspension [Vertical] [LuCaZ].webp': require('./Zaregoto Series/Novel Covers/Zaregoto Series v03 - Suspension [Vertical] [LuCaZ].webp'),
   'Zaregoto Series|Zaregoto Series v04 - Psycho Logical [DutchAngleTL].webp': require('./Zaregoto Series/Novel Covers/Zaregoto Series v04 - Psycho Logical [DutchAngleTL].webp'),
   'Zaregoto Series|Zaregoto Series v05 - Psycho Logical 2 [DutchAngleTL].webp': require('./Zaregoto Series/Novel Covers/Zaregoto Series v05 - Psycho Logical 2 [DutchAngleTL].webp'),
+  'Zaregoto Series|Zaregoto Series v06 - Hitokui Magical [Suiminchuudoku, SwayTL].webp': require('./Zaregoto Series/Novel Covers/Zaregoto Series v06 - Hitokui Magical [Suiminchuudoku, SwayTL].webp'),
   'Zaregoto Series|Zaregoto Series v07 - Nekosogi Radical 1 [SwayTL].webp': require('./Zaregoto Series/Novel Covers/Zaregoto Series v07 - Nekosogi Radical 1 [SwayTL].webp'),
   'Zaregoto Series|Zaregoto Series v08 - Nekosogi Radical 2 [SwayTL].webp': require('./Zaregoto Series/Novel Covers/Zaregoto Series v08 - Nekosogi Radical 2 [SwayTL].webp'),
   'Zaregoto Series|Zaregoto Series v09 - Nekosogi Radical 3 [SwayTL].webp': require('./Zaregoto Series/Novel Covers/Zaregoto Series v09 - Nekosogi Radical 3 [SwayTL].webp'),
