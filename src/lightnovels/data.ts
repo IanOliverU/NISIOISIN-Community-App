@@ -35,6 +35,18 @@ export const manifest: Manifest = {
     ]
   },
   {
+    id: "densetsu-series",
+    name: "Densetsu Series",
+    folder: "Densetsu Series",
+    volumes: []
+  },
+  {
+    id: "katanagatari-series",
+    name: "Katanagatari Series",
+    folder: "Katanagatari Series",
+    volumes: []
+  },
+  {
     id: "monogatari-series",
     name: "Monogatari Series",
     folder: "Monogatari Series",
@@ -140,6 +152,24 @@ export const manifest: Manifest = {
         pdfFilename: "Monogatari Series v20 - ZOKU OWARIMONOGATARI [Vertical] [LuCaZ].pdf"
       }
     ]
+  },
+  {
+    id: "ningen-series",
+    name: "Ningen Series",
+    folder: "Ningen Series",
+    volumes: []
+  },
+  {
+    id: "risuka-series",
+    name: "Risuka Series",
+    folder: "Risuka Series",
+    volumes: []
+  },
+  {
+    id: "saikyou-series",
+    name: "Saikyou Series",
+    folder: "Saikyou Series",
+    volumes: []
   },
   {
     id: "sekai-series",
